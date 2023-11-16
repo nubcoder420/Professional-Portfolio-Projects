@@ -1,0 +1,5 @@
+Project approach:
+
+- create a dictionary containing letters, numbers and special characters, with corresponding morse code values
+- take user input
+- convert each character from user input to morse code
