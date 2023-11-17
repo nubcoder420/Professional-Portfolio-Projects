@@ -1,0 +1,3 @@
+Day 82 - Web Development - Professional Portfolio Project
+
+- use flask framework to build the project
