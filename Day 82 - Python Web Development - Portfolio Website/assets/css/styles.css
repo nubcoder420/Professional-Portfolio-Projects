@@ -1,0 +1,49 @@
+body {
+    background-color: #393E46;
+    color: #929AAB;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+/* Header Section */
+header {
+    padding: 20px;
+    margin-left: 72px;
+    margin-top: 30px;
+}
+
+h1 {
+    color: #EEEEEE;
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+header div {
+    margin-top: 36px;
+    margin-bottom: 36px;
+}
+
+div p {
+    margin-bottom: 0px;
+}
+
+nav {
+    color: #929AAB;
+    font-size: 36px;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+nav i {
+    color: #929AAB;
+    margin-top: 12px;
+}
+
+#name-title {
+    color: #EEEEEE;
+    margin-bottom: 24px;
+}
+
+
