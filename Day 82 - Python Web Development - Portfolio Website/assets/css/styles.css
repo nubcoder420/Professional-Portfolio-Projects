@@ -115,3 +115,28 @@ nav i {
         margin-right: 10px;
     }
 }
+
+
+/* Footer Section */
+footer {
+    color: #EEEEEE;
+    padding: 20px;
+    margin-top: 10px; /* Adjust margin as needed */
+    margin-left: 72px;
+    text-align: left;
+}
+
+/* Copyright */
+.copyright {
+    font-size: 14px;
+    margin-top: 10px; /* Adjust spacing from the footer content */
+}
+
+/* Media Queries for Responsive Design */
+@media screen and (max-width: 768px) {
+    footer {
+        margin-left: 12px;
+        margin-right: 20px;
+    }
+}
+
