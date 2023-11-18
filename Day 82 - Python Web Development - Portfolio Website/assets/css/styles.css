@@ -140,3 +140,62 @@ footer {
     }
 }
 
+
+/* images */
+/* Additional CSS for Project Items */
+.project-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.project-item img {
+    width: 400px; /* Set the width of the image */
+    height: 200px; /* Set the height of the image */
+    margin-right: 20px; /* Adjust the spacing between image and text */
+}
+
+/* Media Queries for Responsive Design */
+/* For Tablets */
+@media screen and (max-width: 768px) {
+    .project-item {
+        flex-direction: column; /* Stack items in a column on smaller screens */
+        text-align: center;
+    }
+
+    .project-item img {
+        width: 300px;
+        height: 150px;
+        margin: 0; /* Remove the right margin on smaller screens */
+        margin-bottom: 10px; /* Add some space between image and text */
+    }
+
+    .project-item:nth-child(even) {
+        flex-direction: column-reverse; /* Reverse order for even-numbered items */
+    }
+
+    /* Additional styles for adjusting the second image */
+    .project-item:nth-child(2) img {
+        margin-top: 10px; /* Add some space between the image and paragraph */
+    }
+}
+
+/* For Mobile Phones */
+@media screen and (max-width: 480px) {
+    .project-item {
+        flex-direction: column; /* Stack items in a column on smaller screens */
+        text-align: left;
+    }
+
+    .project-item img {
+        width: 300px; /* Adjust image width for smaller screens */
+        height: 150px; /* Adjust image height for smaller screens */
+        margin-bottom: 10px; /* Add some space between image and text */
+        margin-top: 10px;
+    }
+
+    .project-item:nth-child(even) {
+        flex-direction: column-reverse; /* Reverse order for even-numbered items */
+    }
+}
