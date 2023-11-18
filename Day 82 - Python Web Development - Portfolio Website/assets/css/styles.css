@@ -2,8 +2,8 @@ body {
     background-color: #393E46;
     color: #929AAB;
     font-family: 'Montserrat', sans-serif;
+    margin: 0;
 }
-
 
 /* Header Section */
 header {
@@ -25,7 +25,7 @@ header div {
 }
 
 div p {
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 nav {
@@ -40,6 +40,7 @@ nav a {
 nav i {
     color: #929AAB;
     margin-top: 12px;
+    margin-right: 10px;
 }
 
 #name-title {
@@ -47,11 +48,70 @@ nav i {
     margin-bottom: 24px;
 }
 
-
 /* Sections */
+.section-name {
+    color: #EEEEEE;
+}
 
 .section {
     padding: 20px 20px;
     margin-left: 72px;
     margin-right: 72px;
+}
+
+
+/* Media Queries for Responsive Design */
+/* For Tablets */
+@media screen and (max-width: 768px) {
+    header {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    nav {
+        font-size: 30px;
+    }
+
+    nav i {
+        margin-top: 8px;
+        margin-right: 8px;
+    }
+
+    #name-title {
+        margin-bottom: 12px;
+    }
+
+    .section {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+/* For Mobile Phones */
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 1.5em;
+    }
+
+    nav {
+        font-size: 24px;
+    }
+
+    nav i {
+        margin-top: 4px;
+        margin-right: 6px;
+    }
+
+    #name-title {
+        margin-bottom: 8px;
+    }
+
+    .section {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 }
