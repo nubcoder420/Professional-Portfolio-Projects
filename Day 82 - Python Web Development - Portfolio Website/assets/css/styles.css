@@ -9,6 +9,7 @@ body {
 header {
     padding: 20px;
     margin-left: 72px;
+    margin-right: 72px;
     margin-top: 30px;
 }
 
@@ -47,3 +48,10 @@ nav i {
 }
 
 
+/* Sections */
+
+.section {
+    padding: 20px 20px;
+    margin-left: 72px;
+    margin-right: 72px;
+}
