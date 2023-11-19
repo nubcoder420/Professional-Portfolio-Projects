@@ -1,0 +1,5 @@
+Day 84 - GUI - Watermark App
+
+- I chose to use customtkinter for this project for modern look and feel
+https://pypi.org/project/customtkinter/0.3/
+
