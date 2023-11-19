@@ -7,6 +7,7 @@ BASE_VEHICLE_RENT_COST = 4500 # 4500 pesos per day
 
 def calculate_cost():
     
+    global distance
     total_distance = float(distance.get()) if distance.get() else 0
     fuel_consumption_value = float(fuel_consumption.get()) if fuel_consumption.get() else BASE_FUEL_CONSUMPTION_VALUE
     fuel_price_value = float(fuel_price.get()) if fuel_price.get() else BASE_FUEL_PRICE
