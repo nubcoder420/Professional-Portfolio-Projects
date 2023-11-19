@@ -15,7 +15,17 @@ def calculate_cost():
 
     estimated_total_cost = (((total_distance * 2) / fuel_consumption_value) * fuel_price_value) + toll_fee_value + vehicle_rental_value
 
-    print(estimated_total_cost)
+    # print(estimated_total_cost)
+
+    description_text = (
+        f'Total Distance: {total_distance * 2} kms\n'
+        f'Fuel Consumption: {fuel_consumption_value} km/L\n'
+        f'Fuel Price: {fuel_price_value} pesos/L\n'
+        f'Toll Fee: {toll_fee_value} pesos\n'
+        f'Vehicle Rental Cost: {vehicle_rental_value} pesos\n'
+        f'Estimated Total Cost: {estimated_total_cost:.2f} pesos'
+    )
+    description.configure(text=description_text)
 
 app = customtkinter.CTk()
 app.title('LakbayPinas Travel Cost Estimator')
@@ -26,10 +36,10 @@ distance_label = customtkinter.CTkLabel(app, text="Enter Total Distance from Poi
 distance = (customtkinter.CTkEntry(app, width=300, placeholder_text='e.g. 100'))
 
 fuel_consumption_label = customtkinter.CTkLabel(app, text='Enter Vehicle Fuel Consumption (km/L)')
-fuel_consumption = customtkinter.CTkEntry(app, width=300, placeholder_text='e.g. 8')
+fuel_consumption = customtkinter.CTkEntry(app, width=300, placeholder_text='Default value: 8')
 
 fuel_price_label = customtkinter.CTkLabel(app, text='Enter Current Fuel Price (pesos/L):')
-fuel_price = customtkinter.CTkEntry(app, width=300, placeholder_text='e.g. 65')
+fuel_price = customtkinter.CTkEntry(app, width=300, placeholder_text='Default value: 65')
 
 toll_fee_label = customtkinter.CTkLabel(app, text='Enter Toll Fee Estimate in Pesos:')
 toll_fee = customtkinter.CTkEntry(app, width=300, placeholder_text='e.g. 1000')
@@ -60,14 +70,30 @@ calculate_button.grid(row=15, column=0, padx=20, pady=40, sticky='w')
 
 
 # ----- RIGHT COLUMN ----- #
+description_text = (
+    'Total Distance:   kms\n'
+    'Fuel Consumption:   km/L\n'
+    'Fuel Price:  pesos\n'
+    'Toll Fee:  pesos\n'
+    'Vehicle Rental Cost:  pesos\n\n'
+    'Estimated Total Cost:  pesos'
+)
 description = customtkinter.CTkLabel(
     app,
     wraplength=200,
     justify='left',
-    text=f'DESCRIPTION PLACEHOLDER',
+    text=description_text,
+)
+
+formula_label = customtkinter.CTkLabel(
+    app, 
+    wraplength=200,
+    justify='left',
+    text='Formula = [(Total Distance * 2) / Fuel Consumption * Fuel Price] + Toll Fee + Rental Cost'
 )
 
 # ----- RIGHT GRID LAYOUT ----- #
-description.grid(row=0, column=1, padx=20, pady=5, sticky='w', rowspan=1)
+description.grid(row=1, column=1, padx=20, pady=5, sticky='w', rowspan=10)
+formula_label.grid(row=0, column=1, padx=20, pady=20, sticky='w', rowspan=4)
 
 app.mainloop()
