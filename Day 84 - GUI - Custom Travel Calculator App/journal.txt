@@ -1,4 +1,6 @@
 Day 84 - GUI - Custom Travel Calculator App
 
-- use customtkinter
+- change the project from Watermark App to Custom Travel Calculator App
+- use customtkinter instead of tkinter for moder look and feel
+- 
 
