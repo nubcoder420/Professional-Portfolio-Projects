@@ -46,10 +46,10 @@ description = customtkinter.CTkLabel(
     app,
     wraplength=200,
     justify='left',
-    text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent maximus diam neque, eu dapibus turpis efficitur maximus. Donec suscipit nisi vitae urna pretium condimentum quis et lacus. Sed at finibus nisl, tincidunt sagittis tortor. Morbi pharetra leo dui, et luctus mauris egestas vitae. Donec quis massa vel arcu rutrum pellentesque. Mauris ultrices vehicula purus, sed tempor eros malesuada ac. Aliquam ante ex, pharetra at pellentesque at, eleifend vitae neque. "
+    text=f'DESCRIPTION PLACEHOLDER',
 )
 
 # ----- RIGHT GRID LAYOUT ----- #
-description.grid(row=0, column=1, padx=20, pady=5, sticky='w', rowspan=10)
+description.grid(row=0, column=1, padx=20, pady=5, sticky='w', rowspan=1)
 
 app.mainloop()
