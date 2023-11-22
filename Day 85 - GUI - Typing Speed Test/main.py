@@ -1,6 +1,5 @@
 import tkinter as tk
 from datetime import datetime
-import random
 
 
 test_words = """
@@ -48,7 +47,7 @@ class TypingSpeedTestApp:
         self.label.pack(pady=10)
 
         self.text_entry = tk.Entry(root, font=('Arial', 12))
-        self.text_entry.pack(pady=10)
+        self.text_entry.pack(pady=30)
         self.text_entry.focus_set()
 
         self.start_button = tk.Button(root, text='Start Test', command=self.start_test)
@@ -59,27 +58,30 @@ class TypingSpeedTestApp:
 
 
     def start_test(self):
-
         self.words = words_list
         self.current_word_index = 0
 
-        self.start_time = datetime.now()
-
-        self.label_text.set('Type the following text:')
+        # Display the first few words to type
+        display_text = " ".join(self.words[:5])
+        self.label_text.set(f'Type the following text: {display_text}...')
+        
         self.result_label_text.set('')
-        self.start_button["state"] = 'disabled'
+        self.start_button['state'] = 'disabled'
         self.text_entry.delete(0, tk.END)
         self.text_entry['state'] = 'normal'
         self.text_entry.bind('<Key>', self.check_input)
 
+
     
     def check_input(self, event):
-
         entered_text = self.text_entry.get()
         entered_words = entered_text.split()
 
-        if entered_words == self.words[:len(entered_words)]:
-
+        if len(entered_words) == 0:
+            # Display the first 5 words to type when no input is entered
+            display_text = " ".join(self.words[:5])
+            self.label_text.set(f'Type the following text: {display_text}...')
+        elif entered_words == self.words[:len(entered_words)]:
             if len(entered_words) == len(self.words):
                 self.end_time = datetime.now()
                 elapsed_time = self.end_time - self.start_time
@@ -92,10 +94,19 @@ class TypingSpeedTestApp:
                 self.start_button['state'] = 'normal'
                 self.text_entry['state'] = 'disabled'
                 self.text_entry.unbind('<Key>')
-
+            elif len(entered_words) % 5 == 0:
+                # Display the next 5 words to type if the user typed the previous 5 words correctly
+                next_display_text = " ".join(self.words[len(entered_words):len(entered_words)+5])
+                self.label_text.set(f'Type the following text: {next_display_text}...')
         else:
-            
-            self.label_text.set("Type the following text (mistakes may occur):")
+            # Display only the current set of words
+            current_display_text = " ".join(self.words[:len(entered_words) + 1])
+            self.label_text.set(f'Type the following text: {current_display_text}...')
+
+
+
+
+
 
 
 if __name__ == '__main__':
