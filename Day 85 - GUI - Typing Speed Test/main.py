@@ -78,9 +78,13 @@ class TypingSpeedTestApp:
         entered_words = entered_text.split()
 
         if len(entered_words) == 0:
-            # Display the first 5 words to type when no input is entered
-            display_text = " ".join(self.words[:5])
+            # Display the first 7 words to type when no input is entered
+            display_text = " ".join(self.words[:7])
             self.label_text.set(f'Type the following text: {display_text}...')
+        elif len(entered_words[0]) == 1:
+            # Display the next 6 words permanently after typing the second letter of the first word
+            next_display_text = " ".join(self.words[1:7])
+            self.label_text.set(f'Type the following text: {next_display_text}...')
         elif entered_words == self.words[:len(entered_words)]:
             if len(entered_words) == len(self.words):
                 self.end_time = datetime.now()
@@ -94,14 +98,17 @@ class TypingSpeedTestApp:
                 self.start_button['state'] = 'normal'
                 self.text_entry['state'] = 'disabled'
                 self.text_entry.unbind('<Key>')
-            elif len(entered_words) % 5 == 0:
-                # Display the next 5 words to type if the user typed the previous 5 words correctly
-                next_display_text = " ".join(self.words[len(entered_words):len(entered_words)+5])
+            elif len(entered_words) % 6 == 0:
+                # Display the next 7 words (including the current word) if the user typed the previous 6 words correctly
+                next_display_text = " ".join(self.words[len(entered_words):len(entered_words) + 7])
                 self.label_text.set(f'Type the following text: {next_display_text}...')
         else:
             # Display only the current set of words
-            current_display_text = " ".join(self.words[:len(entered_words) + 1])
+            current_display_text = " ".join(self.words[len(entered_words) - 1:len(entered_words) + 6])
             self.label_text.set(f'Type the following text: {current_display_text}...')
+
+
+
 
 
 
