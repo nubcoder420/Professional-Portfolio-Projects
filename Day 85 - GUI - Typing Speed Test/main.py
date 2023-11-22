@@ -56,7 +56,6 @@ class TypingSpeedTestApp:
         self.result_label_text = tk.StringVar()
         self.result_label = tk.Label(root, textvariable=self.result_label_text, font=('Arial', 12))
 
-
     def start_test(self):
         self.words = words_list
         self.current_word_index = 0
@@ -70,9 +69,27 @@ class TypingSpeedTestApp:
         self.text_entry.delete(0, tk.END)
         self.text_entry['state'] = 'normal'
         self.text_entry.bind('<Key>', self.check_input)
+        
+        # Start the timer
+        self.start_time = datetime.now()
+        
+        # Schedule the end_test function to be called after 60 seconds
+        self.root.after(60000, self.end_test)
 
+    def end_test(self):
+        # User has completed 60 seconds, end the test
+        self.end_time = datetime.now()
+        elapsed_time = self.end_time - self.start_time
+        elapsed_minutes = elapsed_time.total_seconds() / 60.0
+        words_per_minute = int(len(self.words) / elapsed_minutes)
 
-    
+        result_text = f'Your typing speed: {words_per_minute} words per minute'
+        self.result_label_text.set(result_text)
+
+        self.start_button['state'] = 'normal'
+        self.text_entry['state'] = 'disabled'
+        self.text_entry.unbind('<Key>')
+
     def check_input(self, event):
         entered_text = self.text_entry.get()
         entered_words = entered_text.split()
@@ -88,17 +105,7 @@ class TypingSpeedTestApp:
         if entered_words == self.words[:len(entered_words)]:
             if len(entered_words) == len(self.words):
                 # User has completed typing all words
-                self.end_time = datetime.now()
-                elapsed_time = self.end_time - self.start_time
-                elapsed_minutes = elapsed_time.total_seconds() / 60.0
-                words_per_minute = int(len(self.words) / elapsed_minutes)
-
-                result_text = f'Your typing speed: {words_per_minute} words per minute'
-                self.result_label_text.set(result_text)
-
-                self.start_button['state'] = 'normal'
-                self.text_entry['state'] = 'disabled'
-                self.text_entry.unbind('<Key>')
+                self.end_test()
             elif len(entered_words) % 10 == 0:
                 # User has correctly typed the current set of words, display the next set
                 next_words = self.words[len(entered_words):len(entered_words) + 10]
@@ -107,7 +114,6 @@ class TypingSpeedTestApp:
         else:
             # User has made a mistake, display the current set of words again
             self.result_label_text.set('')
-
 
 if __name__ == '__main__':
     root = tk.Tk()
