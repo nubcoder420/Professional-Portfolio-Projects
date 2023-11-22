@@ -61,9 +61,9 @@ class TypingSpeedTestApp:
         self.words = words_list
         self.current_word_index = 0
 
-        # Display the first few words to type
-        display_text = " ".join(self.words[:5])
-        self.label_text.set(f'Type the following text: {display_text}...')
+        # Display the first ten words to type
+        display_text = " ".join(self.words[:10])
+        self.label_text.set(display_text)
         
         self.result_label_text.set('')
         self.start_button['state'] = 'disabled'
@@ -83,7 +83,7 @@ class TypingSpeedTestApp:
 
         # Display the current set of words
         display_text = " ".join(current_words)
-        self.label_text.set(f'Line 1: {display_text}')
+        self.label_text.set(display_text)
 
         if entered_words == self.words[:len(entered_words)]:
             if len(entered_words) == len(self.words):
@@ -103,17 +103,10 @@ class TypingSpeedTestApp:
                 # User has correctly typed the current set of words, display the next set
                 next_words = self.words[len(entered_words):len(entered_words) + 10]
                 next_display_text = " ".join(next_words)
-                self.label_text.set(f'Line 1: {next_display_text}')
+                self.label_text.set(next_display_text)
         else:
             # User has made a mistake, display the current set of words again
             self.result_label_text.set('')
-
-
-
-
-
-
-
 
 
 if __name__ == '__main__':
