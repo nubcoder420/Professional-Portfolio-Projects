@@ -77,16 +77,17 @@ class TypingSpeedTestApp:
         entered_text = self.text_entry.get()
         entered_words = entered_text.split()
 
-        if len(entered_words) == 0:
-            # Display the first 7 words to type when no input is entered
-            display_text = " ".join(self.words[:7])
-            self.label_text.set(f'Type the following text: {display_text}...')
-        elif len(entered_words[0]) == 1:
-            # Display the next 6 words permanently after typing the second letter of the first word
-            next_display_text = " ".join(self.words[1:7])
-            self.label_text.set(f'Type the following text: {next_display_text}...')
-        elif entered_words == self.words[:len(entered_words)]:
+        # Determine the current set of words to display
+        start_index = (len(entered_words) // 10) * 10
+        current_words = self.words[start_index:start_index + 10]
+
+        # Display the current set of words
+        display_text = " ".join(current_words)
+        self.label_text.set(f'Line 1: {display_text}')
+
+        if entered_words == self.words[:len(entered_words)]:
             if len(entered_words) == len(self.words):
+                # User has completed typing all words
                 self.end_time = datetime.now()
                 elapsed_time = self.end_time - self.start_time
                 elapsed_minutes = elapsed_time.total_seconds() / 60.0
@@ -98,15 +99,14 @@ class TypingSpeedTestApp:
                 self.start_button['state'] = 'normal'
                 self.text_entry['state'] = 'disabled'
                 self.text_entry.unbind('<Key>')
-            elif len(entered_words) % 6 == 0:
-                # Display the next 7 words (including the current word) if the user typed the previous 6 words correctly
-                next_display_text = " ".join(self.words[len(entered_words):len(entered_words) + 7])
-                self.label_text.set(f'Type the following text: {next_display_text}...')
+            elif len(entered_words) % 10 == 0:
+                # User has correctly typed the current set of words, display the next set
+                next_words = self.words[len(entered_words):len(entered_words) + 10]
+                next_display_text = " ".join(next_words)
+                self.label_text.set(f'Line 1: {next_display_text}')
         else:
-            # Display only the current set of words
-            current_display_text = " ".join(self.words[len(entered_words) - 1:len(entered_words) + 6])
-            self.label_text.set(f'Type the following text: {current_display_text}...')
-
+            # User has made a mistake, display the current set of words again
+            self.result_label_text.set('')
 
 
 
