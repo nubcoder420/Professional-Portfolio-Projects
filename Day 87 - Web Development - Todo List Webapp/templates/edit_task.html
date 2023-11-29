@@ -16,7 +16,7 @@
         {{ form.csrf_token }}
         {{ form.hidden_tag() }}
 
-        <label for="task">Edit Task:</label>
+        <label for="{{ form.task.id }}">Edit Task:</label>
         {{ form.task(size=32, id=form.task.id) }}
 
         <button type="submit">Update Task</button>
