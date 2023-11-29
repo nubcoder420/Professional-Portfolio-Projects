@@ -17,9 +17,10 @@
         {% endfor %}
     </ul>
 
-    <form action="/add" method="post">
+    <form action="{{ url_for('add_task') }}" method="post">
+        {{ form.csrf_token }}
         <label for="task">New Task:</label>
-        <input type="text" id="task" name="task" required>
+        {{ form.task(size=32, id=form.task.id, placeholder='Enter Task') }}
         <button type="submit">Add Task</button>
     </form>
 
