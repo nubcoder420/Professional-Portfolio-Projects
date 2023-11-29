@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, HiddenField
 from wtforms.validators import DataRequired
 
 
@@ -17,7 +17,8 @@ class Task(db.Model):
 
 class TaskForm(FlaskForm):
     task = StringField('Task', validators=[DataRequired()])
-    submit = SubmitField('Add Task')
+    task_id = HiddenField('Task ID')
+    submit = SubmitField('Update Task')
 
 #----- run once to create db -----#
 # with app.app_context():
@@ -39,6 +40,17 @@ def add_task():
         db.session.commit()
     return redirect(url_for('index'))
 
+@app.route('/edit/<int:task_id>', methods=['GET', 'POST'])
+def edit_task(task_id):
+    task = Task.query.get_or_404(task_id)
+    form = TaskForm(request.form, obj=task)
+
+    if request.method == 'POST' and form.validate_on_submit():
+        task.content = form.task.data
+        db.session.commit()
+        return redirect(url_for('index'))
+    
+    return render_template('edit_task.html', form=form, task=task)
 
 
 if __name__ == '__main__':
