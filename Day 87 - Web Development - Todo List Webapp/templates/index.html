@@ -9,14 +9,12 @@
     {% for task in tasks %}
     <li class="list-group-item d-flex justify-content-between align-items-center">
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="doneCheckbox{{ task.id }}" {% if task.done %}checked{%
-                endif %} disabled>
+            <input class="form-check-input" type="checkbox" id="doneCheckbox{{ task.id }}" {% if task.done %}checked{% endif %} disabled>
             <label class="form-check-label" for="doneCheckbox{{ task.id }}">Done</label>
         </div>
         <div>
-            {% set limited_content = task.content[:50] + '...' if task.content and task.content|length > 50 else
-            task.content %}
-            <span>{{ limited_content }}</span>
+            {% set limited_content = task.content[:50] + '...' if task.content and task.content|length > 50 else task.content %}
+            <span class="limited-content">{{ limited_content }}</span>
         </div>
         <div>
             <a href="{{ url_for('edit_task', task_id=task.id) }}" class="btn btn-primary btn-sm me-2">Edit</a>
@@ -31,8 +29,7 @@
     <div class="input-group">
         <label for="task" class="visually-hidden">New Task:</label>
         {% set task_input_value = form.task.data[:50] + '...' if form.task.data and form.task.data|length > 50 else '' %}
-        {{ form.task(size=32, id=form.task.id, placeholder='Enter Task', class='form-control', value=task_input_value)
-        }}
+        {{ form.task(size=32, id=form.task.id, placeholder='Enter Task', class='form-control', value=task_input_value) }}
         <button type="submit" class="btn btn-success">Add Task</button>
     </div>
 </form>

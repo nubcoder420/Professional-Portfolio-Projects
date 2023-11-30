@@ -1,0 +1,19 @@
+@media (max-width: 576px) {
+    .limited-content {
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 6em;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .limited-content {
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 15em;
+    }
+}
