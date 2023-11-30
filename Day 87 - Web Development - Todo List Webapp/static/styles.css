@@ -17,3 +17,11 @@
         max-width: 15em;
     }
 }
+
+h4 {
+    color: #404258;
+}
+
+.navbar-custom {
+    background-color: #404258 !important;
+}
