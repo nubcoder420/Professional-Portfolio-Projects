@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -32,4 +32,33 @@
 
 </body>
 
-</html>
+</html> -->
+
+
+
+{% extends "base.html" %}
+
+{% block title %}ToDo App{% endblock %}
+
+{% block content %}
+<h1 class="mt-5">ToDo List</h1>
+
+<ul class="list-group mt-4">
+    {% for task in tasks %}
+    <li class="list-group-item">
+        {{ task.content }}
+        <a href="{{ url_for('edit_task', task_id=task.id) }}" class="btn btn-primary btn-sm">Edit</a>
+        <a href="{{ url_for('delete_task', task_id=task.id) }}" class="btn btn-danger btn-sm">Delete</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<form action="{{ url_for('add_task') }}" method="post" class="mt-4">
+    {{ form.csrf_token }}
+    <div class="form-group">
+        <label for="task">New Task:</label>
+        {{ form.task(size=32, id=form.task.id, placeholder='Enter Task', class='form-control') }}
+    </div>
+    <button type="submit" class="btn btn-success">Add Task</button>
+</form>
+{% endblock %}

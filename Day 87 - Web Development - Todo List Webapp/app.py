@@ -3,12 +3,15 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, HiddenField
 from wtforms.validators import DataRequired
+from flask_bootstrap import Bootstrap
 
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db'
 app.config['SECRET_KEY'] = 'c7e3bbf68f5c4a8004fc08ff8858117f'
 db = SQLAlchemy(app)
+
+bootstrap = Bootstrap(app)
 
 
 class Task(db.Model):
