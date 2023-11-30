@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, HiddenField
+from wtforms import StringField, SubmitField, HiddenField, BooleanField
 from wtforms.validators import DataRequired
 from flask_bootstrap import Bootstrap
 
@@ -17,10 +17,12 @@ bootstrap = Bootstrap(app)
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200), nullable=False)
+    done = db.Column(db.Boolean, default=False)
 
 class TaskForm(FlaskForm):
     task = StringField('Task', validators=[DataRequired()])
     task_id = HiddenField('Task ID')
+    done = BooleanField('Done')
     submit = SubmitField('Update Task')
 
 #----- run once to create db -----#
@@ -38,7 +40,8 @@ def add_task():
     form = TaskForm(request.form)
     if form.validate_on_submit:
         new_task_content = form.task.data
-        new_task = Task(content=new_task_content)
+        new_task_done = form.done.data
+        new_task = Task(content=new_task_content, done=new_task_done)
         db.session.add(new_task)
         db.session.commit()
     return redirect(url_for('index'))
@@ -50,6 +53,7 @@ def edit_task(task_id):
 
     if request.method == 'POST' and form.validate_on_submit():
         task.content = form.task.data
+        task.done = form.done.data
         db.session.commit()
         return redirect(url_for('index'))
     
