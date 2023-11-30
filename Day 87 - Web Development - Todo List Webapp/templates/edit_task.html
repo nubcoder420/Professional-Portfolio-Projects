@@ -1,28 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToDo App</title>
-</head>
+{% block title %}ToDo App{% endblock %}
 
-<body>
+{% block content %}
 
-    <h1>Edit Task</h1>
+<h1 class="mt-5">Edit Task</h1>
 
-    <form action="{{ url_for('edit_task', task_id=task.id) }}" method='post'>
+<form action="{{ url_for('edit_task', task_id=task.id) }}" method='post' class="mt-4">
 
-        {{ form.csrf_token }}
-        {{ form.hidden_tag() }}
+    {{ form.csrf_token }}
+    {{ form.hidden_tag() }}
 
-        <label for="{{ form.task.id }}">Edit Task:</label>
-        {{ form.task(size=32, id=form.task.id) }}
+    <div class="mb-3">
+        <label for="{{ form.task.id }}" class="form-label">Edit Task:</label>
+        {{ form.task(size=32, id=form.task.id, class='form-control') }}
+    </div>
 
-        <button type="submit">Update Task</button>
+    <button type="submit" class="btn btn-primary">Update Task</button>
 
-    </form>
-    
-</body>
+</form>
 
-</html>
+{% endblock %}
