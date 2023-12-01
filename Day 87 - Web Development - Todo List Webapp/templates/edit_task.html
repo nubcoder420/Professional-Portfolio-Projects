@@ -26,7 +26,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Update Task</button>
-    <a href="{{ url_for('index') }}" class="btn btn-danger">Cancel</a>
+    <a href="{{ url_for('index') }}" class="btn btn-danger" onclick="return confirm('Discard changes?')">Cancel</a>
 </form>
 
 {% endblock %}
