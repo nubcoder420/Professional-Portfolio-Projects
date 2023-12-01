@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, HiddenField, BooleanField, PasswordField
@@ -113,7 +113,7 @@ def add_task():
 @login_required
 def edit_task(task_id):
     task = Task.query.get_or_404(task_id)
-    if task.author.id != current_user:
+    if task.author.id != current_user.id:
         abort(403)
 
     form = TaskForm(request.form, obj=task)

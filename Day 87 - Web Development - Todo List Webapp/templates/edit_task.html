@@ -6,15 +6,13 @@
 
 <h4 class="mt-5"><strong>Edit Task</strong></h4>
 
-<p>{{ task.content }}</p>
-
 <form action="{{ url_for('edit_task', task_id=task.id) }}" method='post' class="mt-3">
     {{ form.csrf_token }}
     {{ form.hidden_tag() }}
 
     <div class="mb-3">
         <label for="{{ form.task.id }}">Edit Task:</label>
-        {{ form.task(size=32, id=form.task.id) }}
+        {{ form.task(size=32, id=form.task.id, value=task.content) }}
     </div>
 
     <div class="mb-3">
