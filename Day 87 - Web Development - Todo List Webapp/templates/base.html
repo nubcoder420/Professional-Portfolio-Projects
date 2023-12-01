@@ -15,37 +15,36 @@
 <body>
 
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url_for('index') }}">ToDo App</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a>
-                    </li>
-                    <!-- Add more navigation links as needed -->
-                </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url_for('index') }}">ToDo App</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a>
+                </li>
+                <!-- Add more navigation links as needed -->
+            </ul>
 
-                {% if current_user.is_authenticated %}
-                    <span class="navbar-text me-2">
-                        Welcome, {{ current_user.username }}!
-                    </span>
-                    <a href="{{ url_for('logout') }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to logout?')">Logout</a>
+            {% if current_user.is_authenticated %}
+                <span class="navbar-text me-2">
+                    Welcome, {{ current_user.username }}!
+                </span>
+                <a href="{{ url_for('logout') }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to logout?')">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="btn btn-primary me-2">Login</a>
+                <a href="{{ url_for('register') }}" class="btn btn-success me-2">Register</a>
+            {% endif %}
 
-                {% else %}
-                    <a href="{{ url_for('login') }}" class="btn btn-primary me-2">Login</a>
-                    <a href="{{ url_for('register') }}" class="btn btn-success me-2">Register</a>
-                
-                {% endif %}
-
-            </div>
         </div>
-    </nav>
+    </div>
+</nav>
+
 
     <!-- Content Area -->
     <div class="container mt-4">
