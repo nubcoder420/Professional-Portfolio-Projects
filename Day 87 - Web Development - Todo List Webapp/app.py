@@ -113,7 +113,7 @@ def add_task():
 @login_required
 def edit_task(task_id):
     task = Task.query.get_or_404(task_id)
-    if task.author != current_user:
+    if task.author.id != current_user:
         abort(403)
 
     form = TaskForm(request.form, obj=task)
