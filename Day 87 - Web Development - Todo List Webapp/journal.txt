@@ -2,3 +2,46 @@ To do :
 
 - Add Due Date Functionality
 - Improve UI/UX
+
+
+suggestions from chatgpt:
+
+Let's go through the list and see which features from the suggestions apply to your current ToDo web app:
+
+    User Authentication and Authorization:
+        Applied: You've implemented user authentication with Flask-Login.
+
+    CRUD Operations:
+        Applied: You have CRUD operations for tasks (Create, Read, Update, Delete).
+
+    Database Relationships:
+        Applied: You have established a relationship between tasks and users.
+
+    User-Friendly Interface:
+        Partially Applied: You have a basic interface. Consider adding more styling and potentially real-time updates for a smoother UX.
+
+    Form Handling and Validation:
+        Applied: You're using Flask-WTF for form handling.
+
+    User Experience (UX) Enhancements:
+        Partially Applied: You could enhance UX with additional features like sorting, filtering, or drag-and-drop functionality.
+
+    Security Measures:
+        Partially Applied: You have password hashing. Ensure you handle potential security issues like SQL injection and CSRF.
+
+    RESTful API:
+        Not Applied: This is optional. If your app needs to expose data to external clients, consider creating a RESTful API.
+
+    Code Organization and Structure:
+        Partially Applied: Organize your code for better maintainability. Consider breaking down the application into smaller, modular components.
+
+    Documentation:
+        Not Applied: Create documentation to guide users and potential contributors.
+
+    Testing:
+        Not Applied: Consider adding unit tests for critical parts of your application.
+
+    Git Version Control:
+        Partially Applied: Ensure you follow good version control practices.
+
+To impress interviewers, consider focusing on improving the areas labeled as "Partially Applied" and optionally explore features like RESTful API, testing, and documentation. A polished and well-documented project demonstrates professionalism and a commitment to quality.
