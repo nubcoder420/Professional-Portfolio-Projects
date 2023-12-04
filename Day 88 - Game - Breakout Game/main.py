@@ -81,7 +81,7 @@ def breakout():
             paddle_x <= ball_x <= (paddle_x + paddle_width) and
             paddle_y <= ball_y <= (paddle_y + paddle_height)
         ):
-            print(f'ball_speed_y: {ball_speed_y}, paddle_y: {paddle_y}, ball_y: {ball_y}')
+            # print(f'ball_speed_y: {ball_speed_y}, paddle_y: {paddle_y}, ball_y: {ball_y}')
             if ball_speed_y > 0:
                 ball_speed_y *= -1
 
@@ -90,6 +90,7 @@ def breakout():
             if brick.colliderect(pygame.Rect(ball_x - ball_radius, ball_y - ball_radius, 2 * ball_radius, 2 * ball_radius)):
                 bricks.remove(brick)
                 ball_speed_y *= -1
+                score += 1
 
         # ----- Draw on Screen ----- #
         screen.fill(WHITE)
