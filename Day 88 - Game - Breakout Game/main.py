@@ -1,6 +1,6 @@
 import pygame
 import sys
-
+import random
 
 pygame.init()
 
@@ -13,8 +13,8 @@ pygame.display.set_caption('Breakout Game')
 
 # ----- Colors ----- #
 WHITE = (255, 255, 255)
-RED = (255, 0 ,0)
-BLUE = (0, 0 , 255)
+RED = (255, 0, 0)
+BLUE = (0, 0, 255)
 
 def breakout():
 
@@ -22,14 +22,14 @@ def breakout():
     paddle_width = 150
     paddle_height = 20
 
-    paddle_x = (WIDTH - paddle_width // 2)
-    paddle_y = (HEIGHT - 3 * paddle_height)
+    paddle_x = (WIDTH - paddle_width) // 2
+    paddle_y = HEIGHT - 3 * paddle_height
     paddle_speed = 10
 
     # ----- Ball ----- #
     ball_radius = 10
-    ball_x = WIDTH // 2
-    ball_y = HEIGHT // 2
+    ball_x = random.randint(ball_radius, WIDTH - ball_radius)
+    ball_y = random.randint(ball_radius, HEIGHT // 2)
     ball_speed_x = 5
     ball_speed_y = 5
 
@@ -55,7 +55,7 @@ def breakout():
     while not game_over:
 
         for event in pygame.event.get():
-            
+
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
@@ -71,9 +71,14 @@ def breakout():
         ball_x += ball_speed_x
         ball_y += ball_speed_y
 
-        if ball_x <= 0 or ball_x >= WIDTH:
+        if ball_x - ball_radius <= 0 or ball_x + ball_radius >= WIDTH:
             ball_speed_x *= -1
-        if ball_y <= 0 or ball_y >= HEIGHT:
+
+        if ball_y - ball_radius <= 0:
+            ball_speed_y *= -1
+
+        # Check if the ball has reached the bottom edge
+        if ball_y + ball_radius >= HEIGHT:
             game_over = True
 
         # ----- Ball Collision with Paddle ----- #
@@ -81,12 +86,11 @@ def breakout():
             paddle_x <= ball_x <= (paddle_x + paddle_width) and
             paddle_y <= ball_y <= (paddle_y + paddle_height)
         ):
-            # print(f'ball_speed_y: {ball_speed_y}, paddle_y: {paddle_y}, ball_y: {ball_y}')
             if ball_speed_y > 0:
                 ball_speed_y *= -1
 
         # ----- Ball Collision with Bricks ----- #
-        for brick in bricks:
+        for brick in bricks[:]:
             if brick.colliderect(pygame.Rect(ball_x - ball_radius, ball_y - ball_radius, 2 * ball_radius, 2 * ball_radius)):
                 bricks.remove(brick)
                 ball_speed_y *= -1
@@ -106,10 +110,14 @@ def breakout():
         score_text = font.render(f"Score: {score}", True, RED)
         screen.blit(score_text, (10, HEIGHT - 40))
 
+        # ----- Check if all bricks are destroyed ----- #
+        if not bricks and ball_speed_y >= 0:
+            game_over = True
+
         # ----- Refresh the Display ----- #
         pygame.time.delay(10)
         pygame.display.flip()
-        pygame.time.Clock().tick(60)
+        pygame.time.Clock().tick(120)
 
     # ----- Game over screen ----- #
     font = pygame.font.Font(None, 74)
